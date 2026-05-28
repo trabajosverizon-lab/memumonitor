@@ -167,9 +167,12 @@ function bc(p){return p>=90?'bar-danger':p>=75?'bar-warn':'bar-ok'}
 function vc(p){return p>=90?'danger':p>=75?'warn':''}
 
 function sendCmd(pc,cmd){
-  fetch(`https://api.telegram.org/bot${CMD_TOKEN}/sendMessage?chat_id=5195844678&text=${encodeURIComponent(cmd)}`)
-    .then(()=>showToast('Comando enviado'))
-    .catch(()=>showToast('Error al enviar'));
+  // Use XMLHttpRequest to avoid CORS issues
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `https://api.telegram.org/bot${CMD_TOKEN}/sendMessage?chat_id=5195844678&text=${encodeURIComponent(cmd)}`, true);
+  xhr.onload = function() { showToast('Comando enviado: '+cmd); };
+  xhr.onerror = function() { showToast('Error al enviar'); };
+  xhr.send();
 }
 
 function toggleInst(id){
