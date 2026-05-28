@@ -138,6 +138,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <script>
 const TOKEN = '8832829948:AAHzMPZUE-WLqm6Qt8uLSWGoSLvbRW1ZfQg';
+const CMD_TOKEN = '8948098372:AAGe2pTMJlvFkt5uqr5vZzKn8NEwIwM_FdI';
 const PC_TOKENS = {
   'BARCO': '8722598239:AAEteMlyB18jZGcWls3XD8AqIzzMmgZWoJU',
   'BOTE':  '8889538470:AAGRcloWzFHzIXoaIcrGB2-_0jOJs5F8tH4',
@@ -165,7 +166,7 @@ function bc(p){return p>=90?'bar-danger':p>=75?'bar-warn':'bar-ok'}
 function vc(p){return p>=90?'danger':p>=75?'warn':''}
 
 function sendCmd(pc,cmd){
-  fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=5195844678&text=${encodeURIComponent(cmd)}`)
+  fetch(`https://api.telegram.org/bot${CMD_TOKEN}/sendMessage?chat_id=5195844678&text=${encodeURIComponent(cmd)}`)
     .then(()=>showToast('Comando enviado'))
     .catch(()=>showToast('Error al enviar'));
 }
@@ -229,28 +230,19 @@ function renderInstancias(){
 }
 
 async function loadInstances(pc){
-  const tok=PC_TOKENS[pc];
-  if(!tok)return;
   try{
-    await fetch(`https://api.telegram.org/bot${tok}/sendMessage?chat_id=5195844678&text=${encodeURIComponent('/list_'+pc)}`);
-    setTimeout(()=>fetchInstData(pc),3000);
+    await fetch(`https://api.telegram.org/bot${CMD_TOKEN}/sendMessage?chat_id=5195844678&text=${encodeURIComponent('/list_'+pc)}`);
+    setTimeout(()=>fetchInstData(pc),5000);
   }catch(e){}
 }
 
 async function fetchInstData(pc){
   try{
-    const res=await fetch(`https://api.telegram.org/bot${TOKEN}/getUpdates?limit=20&offset=-20`);
+    const res=await fetch('https://raw.githubusercontent.com/trabajosverizon-lab/memu-monitor/main/data/instances.json?t='+Date.now());
     const json=await res.json();
-    for(const upd of(json.result||[])){
-      const msg=upd.channel_post||upd.message;
-      const text=msg&&msg.text;
-      if(!text||!text.startsWith('INSTDATA:'+pc+':'))continue;
-      try{
-        const raw=text.replace('INSTDATA:'+pc+':','');
-        instData[pc]=JSON.parse(raw);
-        renderInstancias();
-        break;
-      }catch(e){}
+    if(json[pc]){
+      instData[pc]=json[pc];
+      renderInstancias();
     }
   }catch(e){}
 }
