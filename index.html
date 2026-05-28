@@ -146,6 +146,7 @@ const PC_TOKENS = {
 };
 let pcData = {};
 let instData = {};
+let openPanels = new Set();
 
 if(window.Telegram&&window.Telegram.WebApp) window.Telegram.WebApp.expand();
 
@@ -174,6 +175,8 @@ function sendCmd(pc,cmd){
 function toggleInst(id){
   const el=document.getElementById(id);
   el.classList.toggle('open');
+  if(el.classList.contains('open')) openPanels.add(id);
+  else openPanels.delete(id);
 }
 
 function renderPC(name,d){
