@@ -215,7 +215,7 @@ function renderInstancias(){
         <div class="inst-title"><i class="ti ti-device-desktop" aria-hidden="true"></i> ${pc}</div>
         <div class="inst-meta">${running}/${insts.length||d.memu} corriendo <i class="ti ti-chevron-down" aria-hidden="true"></i></div>
       </div>
-      <div class="inst-list" id="il-${pc}">
+      <div class="inst-list ${openPanels.has('il-'+pc)?'open':''}" id="il-${pc}">
         ${insts.length?insts.map(inst=>`
           <div class="inst-row">
             <span class="inst-name">${inst.Name}</span>
@@ -326,7 +326,7 @@ async function loadData(){
     const now=new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
     document.getElementById('upd').textContent='Actualizado '+now;
     document.getElementById('pc-list').innerHTML=Object.keys(pcData).length?Object.keys(pcData).map(n=>renderPC(n,pcData[n])).join(''):'<div class="no-data">Sin datos todavía</div>';
-    updateSummary();if(Object.keys(instData).length===0)renderInstancias();renderRecursos();renderAlertas();
+    updateSummary();renderInstancias();renderRecursos();renderAlertas();
   }catch(e){
     document.getElementById('dot').className='dot off';
     document.getElementById('upd').textContent='Error de conexión';
