@@ -246,7 +246,20 @@ async function fetchInstData(pc){
     const json=await res.json();
     if(Array.isArray(json)&&json.length>0){
       instData[pc]=json;
-      renderInstancias();
+      // Only update the specific panel without full re-render
+      const panel=document.getElementById('il-'+pc);
+      if(panel){
+        panel.innerHTML=json.map(inst=>`
+          <div class="inst-row">
+            <span class="inst-name">${inst.Name}</span>
+            <span class="inst-status ${inst.Status==='running'?'inst-on':'inst-off'}">${inst.Status==='running'?'ON':'OFF'}</span>
+            <div class="inst-actions">
+              ${inst.Status!=='running'?`<button class="act-btn start" onclick="sendCmd('${pc}','/start_${pc}_${inst.Index}')" title="Iniciar"><i class="ti ti-player-play" aria-hidden="true"></i></button>`:''}
+              ${inst.Status==='running'?`<button class="act-btn stop" onclick="sendCmd('${pc}','/stop_${pc}_${inst.Index}')" title="Detener"><i class="ti ti-player-stop" aria-hidden="true"></i></button>`:''}
+              ${inst.Status==='running'?`<button class="act-btn spotify" onclick="sendCmd('${pc}','/spotify_${pc}_${inst.Index}')" title="Spotify"><i class="ti ti-music" aria-hidden="true"></i></button>`:''}
+            </div>
+          </div>`).join('');
+      }
     }
   }catch(e){}
 }
