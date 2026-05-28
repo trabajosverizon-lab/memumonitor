@@ -326,7 +326,7 @@ async function loadData(){
     const now=new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
     document.getElementById('upd').textContent='Actualizado '+now;
     document.getElementById('pc-list').innerHTML=Object.keys(pcData).length?Object.keys(pcData).map(n=>renderPC(n,pcData[n])).join(''):'<div class="no-data">Sin datos todavía</div>';
-    updateSummary();renderInstancias();renderRecursos();renderAlertas();
+    updateSummary();renderRecursos();renderAlertas();
   }catch(e){
     document.getElementById('dot').className='dot off';
     document.getElementById('upd').textContent='Error de conexión';
