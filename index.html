@@ -165,9 +165,7 @@ function bc(p){return p>=90?'bar-danger':p>=75?'bar-warn':'bar-ok'}
 function vc(p){return p>=90?'danger':p>=75?'warn':''}
 
 function sendCmd(pc,cmd){
-  const tok=PC_TOKENS[pc];
-  if(!tok){showToast('PC no configurada');return;}
-  fetch(`https://api.telegram.org/bot${tok}/sendMessage?chat_id=5195844678&text=${encodeURIComponent(cmd)}`)
+  fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=5195844678&text=${encodeURIComponent(cmd)}`)
     .then(()=>showToast('Comando enviado'))
     .catch(()=>showToast('Error al enviar'));
 }
