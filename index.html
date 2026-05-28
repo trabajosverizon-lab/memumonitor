@@ -33,7 +33,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .metric-sub{font-size:9px;color:#4a5568;margin-top:1px}
 .sec-title{font-size:10px;font-weight:500;color:#8892b0;text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px}
 .pc-card{background:#151828;border:1px solid #2a2f4a;border-radius:11px;margin-bottom:9px;overflow:hidden}
-.pc-hdr{padding:9px 11px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #2a2f4a;cursor:pointer}
+.pc-hdr{padding:9px 11px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #2a2f4a}
 .pc-name{font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px}
 .badge{font-size:9px;padding:2px 6px;border-radius:20px;font-weight:600}
 .badge-on{background:#14532d;color:#4ade80}
@@ -55,42 +55,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .no-data{text-align:center;padding:30px 15px;color:#4a5568;font-size:12px}
 .spinner{width:18px;height:18px;border:2px solid #2a2f4a;border-top-color:#4f8ef7;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 8px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.inst-hdr{padding:9px 11px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #2a2f4a}
-.inst-title{font-size:12px;font-weight:500}
-.inst-meta{font-size:10px;color:#8892b0}
-.inst-list{max-height:0;overflow:hidden;transition:max-height .3s}
-.inst-list.open{max-height:2000px}
-.inst-row{display:flex;align-items:center;justify-content:space-between;padding:7px 11px;border-bottom:1px solid #1c2035;font-size:11px}
-.inst-row:last-child{border-bottom:none}
-.inst-name{color:#e2e8f0;flex:1}
-.inst-status{font-size:9px;padding:2px 6px;border-radius:4px;font-weight:600;margin:0 6px}
-.inst-on{background:#14532d;color:#4ade80}
-.inst-off{background:#450a0a;color:#f87171}
-.inst-actions{display:flex;gap:4px}
-.act-btn{width:26px;height:26px;border-radius:6px;border:1px solid #2a2f4a;background:#1c2035;color:#8892b0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px}
-.act-btn:hover{background:#2a2f4a;color:#e2e8f0}
-.act-btn.start{border-color:#14532d;color:#4ade80}
-.act-btn.stop{border-color:#450a0a;color:#f87171}
-.act-btn.spotify{border-color:#1db954;color:#1db954}
-.alert-item{background:#151828;border:1px solid #2a2f4a;border-radius:8px;padding:9px 11px;margin-bottom:7px;display:flex;align-items:flex-start;gap:7px}
-.alert-icon.warn{color:#f59e0b}
-.alert-icon.danger{color:#ef4444}
-.alert-text{font-size:11px}
-.alert-time{font-size:9px;color:#4a5568;margin-top:1px}
 .res-card{background:#151828;border:1px solid #2a2f4a;border-radius:11px;padding:10px 12px;margin-bottom:9px}
 .res-title{font-size:12px;font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:6px}
 .res-row{margin-bottom:7px}
 .res-lbl{display:flex;justify-content:space-between;font-size:10px;color:#8892b0;margin-bottom:3px}
 .res-bar{height:4px;border-radius:2px;background:#2a2f4a}
 .res-fill{height:4px;border-radius:2px;transition:width .5s}
-.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1c2035;border:1px solid #2a2f4a;border-radius:8px;padding:8px 14px;font-size:12px;color:#e2e8f0;z-index:100;display:none}
+.alert-item{background:#151828;border:1px solid #2a2f4a;border-radius:8px;padding:9px 11px;margin-bottom:7px;display:flex;align-items:flex-start;gap:7px}
+.alert-icon.warn{color:#f59e0b;font-size:16px}
+.alert-icon.danger{color:#ef4444;font-size:16px}
+.alert-text{font-size:11px}
+.alert-time{font-size:9px;color:#4a5568;margin-top:1px}
 </style>
 </head>
 <body>
 <div class="layout">
   <div class="sidebar">
     <button class="nav-btn active" onclick="showSec('resumen',this)" title="Resumen"><i class="ti ti-home" aria-hidden="true"></i></button>
-    <button class="nav-btn" onclick="showSec('instancias',this)" title="Instancias"><i class="ti ti-device-desktop" aria-hidden="true"></i></button>
     <button class="nav-btn" onclick="showSec('recursos',this)" title="Recursos"><i class="ti ti-chart-bar" aria-hidden="true"></i></button>
     <button class="nav-btn" onclick="showSec('alertas',this)" title="Alertas"><i class="ti ti-bell" aria-hidden="true"></i></button>
   </div>
@@ -116,17 +97,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="sec-title">Estado de PCs</div>
         <div id="pc-list"><div class="no-data"><div class="spinner"></div>Conectando...</div></div>
       </div>
-
-      <div class="section" id="sec-instancias">
-        <div class="sec-title">Instancias MEmu</div>
-        <div id="inst-list"><div class="no-data">Sin datos</div></div>
-      </div>
-
       <div class="section" id="sec-recursos">
         <div class="sec-title">Recursos del sistema</div>
         <div id="rec-list"><div class="no-data">Sin datos</div></div>
       </div>
-
       <div class="section" id="sec-alertas">
         <div class="sec-title">Alertas activas</div>
         <div id="alert-list"><div class="no-data">Sin alertas</div></div>
@@ -134,19 +108,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
   </div>
 </div>
-<div class="toast" id="toast"></div>
 
 <script>
 const TOKEN = '8832829948:AAHzMPZUE-WLqm6Qt8uLSWGoSLvbRW1ZfQg';
-const CMD_TOKEN = '8948098372:AAGe2pTMJlvFkt5uqr5vZzKn8NEwIwM_FdI';
-const PC_TOKENS = {
-  'BARCO': '8722598239:AAEteMlyB18jZGcWls3XD8AqIzzMmgZWoJU',
-  'BOTE':  '8889538470:AAGRcloWzFHzIXoaIcrGB2-_0jOJs5F8tH4',
-  'LAPTOP-8B960U3D': '8960272336:AAG2TfXZwhdNBfj-3FYDJwnqpeEI0lRIHhs'
-};
 let pcData = {};
-let instData = {};
-let openPanels = new Set();
 
 if(window.Telegram&&window.Telegram.WebApp) window.Telegram.WebApp.expand();
 
@@ -157,29 +122,8 @@ function showSec(name,btn){
   btn.classList.add('active');
 }
 
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.style.display='block';
-  setTimeout(()=>t.style.display='none',2500);
-}
-
 function bc(p){return p>=90?'bar-danger':p>=75?'bar-warn':'bar-ok'}
 function vc(p){return p>=90?'danger':p>=75?'warn':''}
-
-function sendCmd(pc,cmd){
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=5195844678&text=${encodeURIComponent(cmd)}`, true);
-  xhr.onload = function() { showToast('Comando: '+cmd); };
-  xhr.onerror = function() { showToast('Error'); };
-  xhr.send();
-}
-
-function toggleInst(id){
-  const el=document.getElementById(id);
-  el.classList.toggle('open');
-  if(el.classList.contains('open')) openPanels.add(id);
-  else openPanels.delete(id);
-}
 
 function renderPC(name,d){
   const now=Math.floor(Date.now()/1000);
@@ -187,7 +131,7 @@ function renderPC(name,d){
   const badge=on?'<span class="badge badge-on">En línea</span>':'<span class="badge badge-off">Sin datos</span>';
   if(!on)return`<div class="pc-card"><div class="pc-hdr"><div class="pc-name"><i class="ti ti-device-desktop" aria-hidden="true"></i>${name} ${badge}</div></div><div class="no-data" style="padding:12px">Sin respuesta reciente</div></div>`;
   return`<div class="pc-card">
-    <div class="pc-hdr" onclick="toggleInst('inst-${name}')">
+    <div class="pc-hdr">
       <div class="pc-name"><i class="ti ti-device-desktop" aria-hidden="true"></i>${d.pc||name} ${badge}</div>
       <span class="pc-time">${d.time||''}</span>
     </div>
@@ -201,69 +145,6 @@ function renderPC(name,d){
     </div>
     <div class="pc-ftr"><span>RAM: <strong>${d.ramUsed}/${d.ramTotal}GB</strong></span><span>•</span><span>Disco: <strong>${d.diskFree}/${d.diskTotal}GB</strong></span></div>
   </div>`;
-}
-
-function renderInstancias(){
-  const now=Math.floor(Date.now()/1000);
-  const online=Object.values(pcData).filter(d=>d&&(now-d.ts)<120);
-  if(!online.length){document.getElementById('inst-list').innerHTML='<div class="no-data">Sin datos</div>';return;}
-  let html='';
-  for(const d of online){
-    const pc=d.pc;
-    const insts=instData[pc]||[];
-    const running=insts.filter(i=>i.Status==='running').length;
-    html+=`<div class="pc-card">
-      <div class="inst-hdr" onclick="toggleInst('il-${pc}');loadInstances('${pc}')">
-        <div class="inst-title"><i class="ti ti-device-desktop" aria-hidden="true"></i> ${pc}</div>
-        <div class="inst-meta">${running}/${insts.length||d.memu} corriendo <i class="ti ti-chevron-down" aria-hidden="true"></i></div>
-      </div>
-      <div class="inst-list ${openPanels.has('il-'+pc)?'open':''}" id="il-${pc}">
-        ${insts.length?insts.map(inst=>`
-          <div class="inst-row">
-            <span class="inst-name">${inst.Name}</span>
-            <span class="inst-status ${inst.Status==='running'?'inst-on':'inst-off'}">${inst.Status==='running'?'ON':'OFF'}</span>
-            <div class="inst-actions">
-              ${inst.Status!=='running'?`<button class="act-btn start" onclick="sendCmd('${pc}','/start_${pc}_${inst.Index}')" title="Iniciar"><i class="ti ti-player-play" aria-hidden="true"></i></button>`:''}
-              ${inst.Status==='running'?`<button class="act-btn stop" onclick="sendCmd('${pc}','/stop_${pc}_${inst.Index}')" title="Detener"><i class="ti ti-player-stop" aria-hidden="true"></i></button>`:''}
-              ${inst.Status==='running'?`<button class="act-btn spotify" onclick="sendCmd('${pc}','/spotify_${pc}_${inst.Index}')" title="Spotify"><i class="ti ti-music" aria-hidden="true"></i></button>`:''}
-            </div>
-          </div>`).join(''):'<div class="no-data" style="padding:10px">Toca para cargar instancias</div>'}
-      </div>
-    </div>`;
-  }
-  document.getElementById('inst-list').innerHTML=html;
-}
-
-async function loadInstances(pc){
-  try{
-    await fetch(`https://api.telegram.org/bot${CMD_TOKEN}/sendMessage?chat_id=5195844678&text=${encodeURIComponent('/list_'+pc)}`);
-    setTimeout(()=>fetchInstData(pc),5000);
-  }catch(e){}
-}
-
-async function fetchInstData(pc){
-  try{
-    const url='https://trabajosverizon-lab.github.io/memumonitor/instancias_'+pc.toLowerCase()+'.json?t='+Date.now();
-    const res=await fetch(url);
-    const json=await res.json();
-    if(Array.isArray(json)&&json.length>0){
-      instData[pc]=json;
-      // Only update the specific panel without full re-render
-      const panel=document.getElementById('il-'+pc);
-      if(panel){
-        panel.innerHTML=json.map(inst=>`
-          <div class="inst-row">
-            <span class="inst-name">${inst.Name}</span>
-            <span class="inst-status ${inst.Status==='running'?'inst-on':'inst-off'}">${inst.Status==='running'?'ON':'OFF'}</span>
-            <div class="inst-actions">
-              ${inst.Status!=='running'?`<button class="act-btn start" onclick="sendCmd('${pc}','/start_${pc}_${inst.Index}')" title="Iniciar"><i class="ti ti-player-play" aria-hidden="true"></i></button>`:''}
-              ${inst.Status==='running'?`<button class="act-btn stop" onclick="sendCmd('${pc}','/stop_${pc}_${inst.Index}')" title="Detener"><i class="ti ti-player-stop" aria-hidden="true"></i></button>`:''}
-              ${inst.Status==='running'?`<button class="act-btn spotify" onclick="sendCmd('${pc}','/spotify_${pc}_${inst.Index}')" title="Spotify"><i class="ti ti-music" aria-hidden="true"></i></button>`:''}
-            </div>
-          </div>`).join('');
-      }
-    }
-  }catch(e){}
 }
 
 function renderRecursos(){
@@ -328,7 +209,7 @@ async function loadData(){
     const now=new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
     document.getElementById('upd').textContent='Actualizado '+now;
     document.getElementById('pc-list').innerHTML=Object.keys(pcData).length?Object.keys(pcData).map(n=>renderPC(n,pcData[n])).join(''):'<div class="no-data">Sin datos todavía</div>';
-    updateSummary();renderInstancias();renderRecursos();renderAlertas();
+    updateSummary();renderRecursos();renderAlertas();
   }catch(e){
     document.getElementById('dot').className='dot off';
     document.getElementById('upd').textContent='Error de conexión';
