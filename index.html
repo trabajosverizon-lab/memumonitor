@@ -174,14 +174,21 @@ function updateSummary() {
     ? Math.round(online.reduce((a, d) => a + (d.ramPct || 0), 0) / online.length) + '%' : '—';
 }
 
-async function loadData() {
-  const dot = document.getElementById('conn-dot');
-  dot.className = 'dot offline';
+async function loadBarco() {
+  try {
+    const res = await fetch('https://raw.githubusercontent.com/trabajosverizon-lab/memu-monitor/main/data/barco.json?t=' + Date.now());
+    const d = await res.json();
+    if (d && d.pc) {
+      pcData[d.pc] = { ...d, ts: d.ts || Math.floor(Date.now()/1000) };
+    }
+  } catch(e) {}
+}
+
+async function loadTelegram() {
   try {
     const res = await fetch(`https://api.telegram.org/bot${TOKEN}/getUpdates?limit=100`);
     const json = await res.json();
-    if (!json.ok) throw new Error('API error');
-
+    if (!json.ok) return;
     const seen = {};
     for (const upd of (json.result || [])) {
       const msg = upd.channel_post || upd.message;
@@ -196,11 +203,20 @@ async function loadData() {
         }
       } catch(e) {}
     }
-
-    pcData = {};
     for (const [key, val] of Object.entries(seen)) {
-      pcData[key] = { ...val.data, ts: val.ts };
+      // Solo actualizar si NO es el barco (que viene de GitHub)
+      if (key !== 'BARCO') {
+        pcData[key] = { ...val.data, ts: val.ts };
+      }
     }
+  } catch(e) {}
+}
+
+async function loadData() {
+  const dot = document.getElementById('conn-dot');
+  dot.className = 'dot offline';
+  try {
+    await Promise.all([loadBarco(), loadTelegram()]);
 
     dot.className = 'dot';
     const now = new Date().toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
