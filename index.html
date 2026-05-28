@@ -238,10 +238,11 @@ async function loadInstances(pc){
 
 async function fetchInstData(pc){
   try{
-    const res=await fetch('https://raw.githubusercontent.com/trabajosverizon-lab/memumonitor/main/instances.json?t='+Date.now());
+    const url='https://trabajosverizon-lab.github.io/memumonitor/data/'+pc.toLowerCase()+'.json?t='+Date.now();
+    const res=await fetch(url);
     const json=await res.json();
-    if(json[pc]){
-      instData[pc]=json[pc];
+    if(json.instances){
+      instData[pc]=json.instances;
       renderInstancias();
     }
   }catch(e){}
