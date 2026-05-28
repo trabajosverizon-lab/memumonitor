@@ -81,7 +81,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 
 <script>
 const TOKEN = '8832829948:AAHzMPZUE-WLqm6Qt8uLSWGoSLvbRW1ZfQg';
-const GROUP_ID = '-1003956582622';
+const GROUP_ID = '-1003543103535';
 
 if (window.Telegram && window.Telegram.WebApp) {
   window.Telegram.WebApp.expand();
@@ -184,14 +184,15 @@ async function loadData() {
 
     const seen = {};
     for (const upd of (json.result || [])) {
-      const text = upd.message && upd.message.text;
+      const msg = upd.channel_post || upd.message;
+      const text = msg && msg.text;
       if (!text || !text.startsWith('PCDATA:')) continue;
       try {
         const raw = decodeURIComponent(text.replace('PCDATA:', ''));
         const d = JSON.parse(raw);
         const key = d.pc || 'PC';
         if (!seen[key] || upd.update_id > seen[key].uid) {
-          seen[key] = { uid: upd.update_id, data: d, ts: upd.message.date };
+          seen[key] = { uid: upd.update_id, data: d, ts: msg.date };
         }
       } catch(e) {}
     }
