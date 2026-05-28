@@ -8,273 +8,326 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0d0f1a;--bg2:#151828;--bg3:#1c2035;--border:#2a2f4a;--text:#e2e8f0;--text2:#8892b0;--text3:#4a5568;--green:#22c55e;--red:#ef4444;--amber:#f59e0b;--blue:#4f8ef7;--purple:#a78bfa}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-.layout{display:flex;height:100vh}
-.sidebar{width:56px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;padding:12px 0;gap:4px;flex-shrink:0}
-.nav-btn{width:40px;height:40px;border-radius:10px;border:none;background:transparent;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all 0.2s}
-.nav-btn:hover,.nav-btn.active{background:var(--bg3);color:var(--blue)}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0d0f1a;color:#e2e8f0;min-height:100vh}
+.layout{display:flex;height:100vh;overflow:hidden}
+.sidebar{width:54px;background:#151828;border-right:1px solid #2a2f4a;display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:3px;flex-shrink:0}
+.nav-btn{width:38px;height:38px;border-radius:9px;border:none;background:transparent;color:#8892b0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;transition:all .2s}
+.nav-btn:hover,.nav-btn.active{background:#1c2035;color:#4f8ef7}
 .main{flex:1;overflow-y:auto;display:flex;flex-direction:column}
-.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
-.topbar-left{display:flex;align-items:center;gap:8px}
-.logo{width:28px;height:28px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px}
-.title{font-size:14px;font-weight:500}
-.status{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2)}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
-.dot.off{background:var(--red);animation:none}
+.topbar{background:#151828;border-bottom:1px solid #2a2f4a;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.topbar-left{display:flex;align-items:center;gap:7px}
+.logo{width:26px;height:26px;background:#4f8ef7;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px}
+.title{font-size:13px;font-weight:500}
+.dot{width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;margin-right:4px;animation:pulse 2s infinite}
+.dot.off{background:#ef4444;animation:none}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.refresh-btn{background:var(--bg3);border:1px solid var(--border);color:var(--text2);border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px}
-.content{padding:12px;flex:1}
+.status{font-size:10px;color:#8892b0}
+.refresh-btn{background:#1c2035;border:1px solid #2a2f4a;color:#8892b0;border-radius:7px;padding:4px 9px;font-size:11px;cursor:pointer;display:flex;align-items:center;gap:3px}
+.content{padding:10px;flex:1}
 .section{display:none}
 .section.active{display:block}
-.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.metric{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
-.metric-label{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
-.metric-value{font-size:22px;font-weight:600;color:var(--text)}
-.metric-sub{font-size:10px;color:var(--text3);margin-top:2px}
-.pc-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden}
-.pc-header{padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
-.pc-name{font-size:13px;font-weight:500;display:flex;align-items:center;gap:7px}
-.badge{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:600}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px}
+.metric{background:#151828;border:1px solid #2a2f4a;border-radius:9px;padding:9px 11px}
+.metric-label{font-size:9px;color:#8892b0;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.metric-value{font-size:20px;font-weight:600}
+.metric-sub{font-size:9px;color:#4a5568;margin-top:1px}
+.sec-title{font-size:10px;font-weight:500;color:#8892b0;text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px}
+.pc-card{background:#151828;border:1px solid #2a2f4a;border-radius:11px;margin-bottom:9px;overflow:hidden}
+.pc-hdr{padding:9px 11px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #2a2f4a;cursor:pointer}
+.pc-name{font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px}
+.badge{font-size:9px;padding:2px 6px;border-radius:20px;font-weight:600}
 .badge-on{background:#14532d;color:#4ade80}
 .badge-off{background:#450a0a;color:#f87171}
-.pc-time{font-size:10px;color:var(--text3)}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
-.stat{background:var(--bg2);padding:8px 10px}
-.stat-label{font-size:9px;color:var(--text3);text-transform:uppercase;margin-bottom:2px}
-.stat-val{font-size:13px;font-weight:500}
-.stat-val.warn{color:var(--amber)}
-.stat-val.danger{color:var(--red)}
-.bar{height:3px;border-radius:2px;margin-top:3px;background:var(--border)}
-.bar-fill{height:3px;border-radius:2px;transition:width .5s}
-.bar-ok{background:var(--green)}
-.bar-warn{background:var(--amber)}
-.bar-danger{background:var(--red)}
-.pc-footer{padding:7px 12px;display:flex;gap:12px;font-size:10px;color:var(--text3)}
-.pc-footer strong{color:var(--text2)}
-.no-data{text-align:center;padding:40px 20px;color:var(--text3);font-size:13px}
-.spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px}
+.pc-time{font-size:9px;color:#4a5568}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#2a2f4a}
+.stat{background:#151828;padding:7px 9px}
+.stat-label{font-size:8px;color:#4a5568;text-transform:uppercase;margin-bottom:2px}
+.stat-val{font-size:12px;font-weight:500}
+.stat-val.warn{color:#f59e0b}
+.stat-val.danger{color:#ef4444}
+.bar{height:2px;border-radius:2px;margin-top:2px;background:#2a2f4a}
+.bar-fill{height:2px;border-radius:2px;transition:width .5s}
+.bar-ok{background:#22c55e}
+.bar-warn{background:#f59e0b}
+.bar-danger{background:#ef4444}
+.pc-ftr{padding:6px 11px;display:flex;gap:10px;font-size:9px;color:#4a5568}
+.pc-ftr strong{color:#8892b0}
+.no-data{text-align:center;padding:30px 15px;color:#4a5568;font-size:12px}
+.spinner{width:18px;height:18px;border:2px solid #2a2f4a;border-top-color:#4f8ef7;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 8px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.last-upd{text-align:center;font-size:10px;color:var(--text3);padding:8px}
-.inst-table{width:100%;border-collapse:collapse;font-size:12px}
-.inst-table th{text-align:left;padding:8px 10px;color:var(--text2);font-weight:500;border-bottom:1px solid var(--border);font-size:11px}
-.inst-table td{padding:8px 10px;border-bottom:1px solid var(--border)}
-.inst-table tr:last-child td{border-bottom:none}
-.inst-table tr:hover td{background:var(--bg3)}
-.tag{font-size:10px;padding:2px 7px;border-radius:4px;font-weight:600}
-.tag-on{background:#14532d;color:#4ade80}
-.tag-off{background:#450a0a;color:#f87171}
-.alert-item{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:8px;display:flex;align-items:flex-start;gap:8px}
-.alert-icon{font-size:16px;margin-top:1px}
-.alert-icon.warn{color:var(--amber)}
-.alert-icon.danger{color:var(--red)}
-.alert-text{font-size:12px;color:var(--text)}
-.alert-time{font-size:10px;color:var(--text3);margin-top:2px}
-.section-title{font-size:11px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.inst-hdr{padding:9px 11px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #2a2f4a}
+.inst-title{font-size:12px;font-weight:500}
+.inst-meta{font-size:10px;color:#8892b0}
+.inst-list{max-height:0;overflow:hidden;transition:max-height .3s}
+.inst-list.open{max-height:2000px}
+.inst-row{display:flex;align-items:center;justify-content:space-between;padding:7px 11px;border-bottom:1px solid #1c2035;font-size:11px}
+.inst-row:last-child{border-bottom:none}
+.inst-name{color:#e2e8f0;flex:1}
+.inst-status{font-size:9px;padding:2px 6px;border-radius:4px;font-weight:600;margin:0 6px}
+.inst-on{background:#14532d;color:#4ade80}
+.inst-off{background:#450a0a;color:#f87171}
+.inst-actions{display:flex;gap:4px}
+.act-btn{width:26px;height:26px;border-radius:6px;border:1px solid #2a2f4a;background:#1c2035;color:#8892b0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px}
+.act-btn:hover{background:#2a2f4a;color:#e2e8f0}
+.act-btn.start{border-color:#14532d;color:#4ade80}
+.act-btn.stop{border-color:#450a0a;color:#f87171}
+.act-btn.spotify{border-color:#1db954;color:#1db954}
+.alert-item{background:#151828;border:1px solid #2a2f4a;border-radius:8px;padding:9px 11px;margin-bottom:7px;display:flex;align-items:flex-start;gap:7px}
+.alert-icon.warn{color:#f59e0b}
+.alert-icon.danger{color:#ef4444}
+.alert-text{font-size:11px}
+.alert-time{font-size:9px;color:#4a5568;margin-top:1px}
+.res-card{background:#151828;border:1px solid #2a2f4a;border-radius:11px;padding:10px 12px;margin-bottom:9px}
+.res-title{font-size:12px;font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.res-row{margin-bottom:7px}
+.res-lbl{display:flex;justify-content:space-between;font-size:10px;color:#8892b0;margin-bottom:3px}
+.res-bar{height:4px;border-radius:2px;background:#2a2f4a}
+.res-fill{height:4px;border-radius:2px;transition:width .5s}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1c2035;border:1px solid #2a2f4a;border-radius:8px;padding:8px 14px;font-size:12px;color:#e2e8f0;z-index:100;display:none}
 </style>
 </head>
 <body>
-<h2 class="sr-only">Dashboard de monitoreo MEmu - estado de PCs en tiempo real</h2>
 <div class="layout">
   <div class="sidebar">
-    <button class="nav-btn active" onclick="showSection('resumen')" title="Resumen"><i class="ti ti-home" aria-hidden="true"></i></button>
-    <button class="nav-btn" onclick="showSection('instancias')" title="Instancias"><i class="ti ti-device-desktop" aria-hidden="true"></i></button>
-    <button class="nav-btn" onclick="showSection('recursos')" title="Recursos"><i class="ti ti-chart-bar" aria-hidden="true"></i></button>
-    <button class="nav-btn" onclick="showSection('alertas')" title="Alertas"><i class="ti ti-bell" aria-hidden="true"></i></button>
+    <button class="nav-btn active" onclick="showSec('resumen',this)" title="Resumen"><i class="ti ti-home" aria-hidden="true"></i></button>
+    <button class="nav-btn" onclick="showSec('instancias',this)" title="Instancias"><i class="ti ti-device-desktop" aria-hidden="true"></i></button>
+    <button class="nav-btn" onclick="showSec('recursos',this)" title="Recursos"><i class="ti ti-chart-bar" aria-hidden="true"></i></button>
+    <button class="nav-btn" onclick="showSec('alertas',this)" title="Alertas"><i class="ti ti-bell" aria-hidden="true"></i></button>
   </div>
   <div class="main">
     <div class="topbar">
       <div class="topbar-left">
         <div class="logo">🖥</div>
         <div>
-          <div class="title"><span class="dot" id="conn-dot"></span> MEmu Monitor</div>
-          <div class="status" id="last-update">Cargando...</div>
+          <div class="title"><span class="dot" id="dot"></span>MEmu Monitor</div>
+          <div class="status" id="upd">Cargando...</div>
         </div>
       </div>
       <button class="refresh-btn" onclick="loadData()"><i class="ti ti-refresh" aria-hidden="true"></i> Actualizar</button>
     </div>
-
     <div class="content">
-      <!-- RESUMEN -->
       <div class="section active" id="sec-resumen">
         <div class="summary-grid">
-          <div class="metric"><div class="metric-label">PCs en línea</div><div class="metric-value" id="s-online">—</div><div class="metric-sub">de <span id="s-total">—</span> total</div></div>
-          <div class="metric"><div class="metric-label">MEmu total</div><div class="metric-value" id="s-memu">—</div><div class="metric-sub">instancias activas</div></div>
+          <div class="metric"><div class="metric-label">PCs en línea</div><div class="metric-value" id="s-on">—</div><div class="metric-sub">de <span id="s-tot">—</span> total</div></div>
+          <div class="metric"><div class="metric-label">MEmu total</div><div class="metric-value" id="s-mu">—</div><div class="metric-sub">instancias activas</div></div>
           <div class="metric"><div class="metric-label">CPU promedio</div><div class="metric-value" id="s-cpu">—</div><div class="metric-sub">todas las PCs</div></div>
           <div class="metric"><div class="metric-label">RAM promedio</div><div class="metric-value" id="s-ram">—</div><div class="metric-sub">todas las PCs</div></div>
         </div>
-        <div class="section-title">Estado de PCs</div>
+        <div class="sec-title">Estado de PCs</div>
         <div id="pc-list"><div class="no-data"><div class="spinner"></div>Conectando...</div></div>
-        <div class="last-upd" id="footer-time"></div>
       </div>
 
-      <!-- INSTANCIAS -->
       <div class="section" id="sec-instancias">
-        <div class="section-title">Instancias MEmu por PC</div>
-        <div id="inst-content"><div class="no-data">Sin datos</div></div>
+        <div class="sec-title">Instancias MEmu</div>
+        <div id="inst-list"><div class="no-data">Sin datos</div></div>
       </div>
 
-      <!-- RECURSOS -->
       <div class="section" id="sec-recursos">
-        <div class="section-title">Recursos del sistema</div>
-        <div id="rec-content"><div class="no-data">Sin datos</div></div>
+        <div class="sec-title">Recursos del sistema</div>
+        <div id="rec-list"><div class="no-data">Sin datos</div></div>
       </div>
 
-      <!-- ALERTAS -->
       <div class="section" id="sec-alertas">
-        <div class="section-title">Alertas recientes</div>
-        <div id="alert-content"><div class="no-data">Sin alertas recientes</div></div>
+        <div class="sec-title">Alertas activas</div>
+        <div id="alert-list"><div class="no-data">Sin alertas</div></div>
       </div>
     </div>
   </div>
 </div>
+<div class="toast" id="toast"></div>
 
 <script>
 const TOKEN = '8832829948:AAHzMPZUE-WLqm6Qt8uLSWGoSLvbRW1ZfQg';
+const PC_TOKENS = {
+  'BARCO': '8722598239:AAEteMlyB18jZGcWls3XD8AqIzzMmgZWoJU',
+  'BOTE':  '8889538470:AAGRcloWzFHzIXoaIcrGB2-_0jOJs5F8tH4',
+  'LAPTOP-8B960U3D': '8960272336:AAG2TfXZwhdNBfj-3FYDJwnqpeEI0lRIHhs'
+};
 let pcData = {};
-let alerts = [];
+let instData = {};
 
-if (window.Telegram && window.Telegram.WebApp) {
-  window.Telegram.WebApp.expand();
+if(window.Telegram&&window.Telegram.WebApp) window.Telegram.WebApp.expand();
+
+function showSec(name,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+name).classList.add('active');
+  btn.classList.add('active');
 }
 
-function showSection(name) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('sec-' + name).classList.add('active');
-  event.currentTarget.classList.add('active');
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.style.display='block';
+  setTimeout(()=>t.style.display='none',2500);
 }
 
-function barColor(pct) {
-  if (pct >= 90) return 'bar-danger';
-  if (pct >= 75) return 'bar-warn';
-  return 'bar-ok';
+function bc(p){return p>=90?'bar-danger':p>=75?'bar-warn':'bar-ok'}
+function vc(p){return p>=90?'danger':p>=75?'warn':''}
+
+function sendCmd(pc,cmd){
+  const tok=PC_TOKENS[pc];
+  if(!tok){showToast('PC no configurada');return;}
+  fetch(`https://api.telegram.org/bot${tok}/sendMessage?chat_id=5195844678&text=${encodeURIComponent(cmd)}`)
+    .then(()=>showToast('Comando enviado'))
+    .catch(()=>showToast('Error al enviar'));
 }
 
-function valColor(pct) {
-  if (pct >= 90) return 'danger';
-  if (pct >= 75) return 'warn';
-  return '';
+function toggleInst(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('open');
 }
 
-function renderPC(name, d) {
-  const now = Math.floor(Date.now() / 1000);
-  const isOnline = d && (now - d.ts) < 120;
-  const badge = isOnline ? '<span class="badge badge-on">En línea</span>' : '<span class="badge badge-off">Sin datos</span>';
-  if (!isOnline) {
-    return `<div class="pc-card"><div class="pc-header"><div class="pc-name"><i class="ti ti-device-desktop" aria-hidden="true"></i>${name} ${badge}</div><span class="pc-time">Sin respuesta</span></div><div class="no-data" style="padding:14px">Sin datos recientes</div></div>`;
-  }
-  return `<div class="pc-card">
-    <div class="pc-header">
+function renderPC(name,d){
+  const now=Math.floor(Date.now()/1000);
+  const on=d&&(now-d.ts)<120;
+  const badge=on?'<span class="badge badge-on">En línea</span>':'<span class="badge badge-off">Sin datos</span>';
+  if(!on)return`<div class="pc-card"><div class="pc-hdr"><div class="pc-name"><i class="ti ti-device-desktop" aria-hidden="true"></i>${name} ${badge}</div></div><div class="no-data" style="padding:12px">Sin respuesta reciente</div></div>`;
+  return`<div class="pc-card">
+    <div class="pc-hdr" onclick="toggleInst('inst-${name}')">
       <div class="pc-name"><i class="ti ti-device-desktop" aria-hidden="true"></i>${d.pc||name} ${badge}</div>
       <span class="pc-time">${d.time||''}</span>
     </div>
     <div class="stats-grid">
-      <div class="stat"><div class="stat-label">CPU</div><div class="stat-val ${valColor(d.cpu)}">${d.cpu}%</div><div class="bar"><div class="bar-fill ${barColor(d.cpu)}" style="width:${Math.min(d.cpu,100)}%"></div></div></div>
-      <div class="stat"><div class="stat-label">RAM</div><div class="stat-val ${valColor(d.ramPct)}">${d.ramPct}%</div><div class="bar"><div class="bar-fill ${barColor(d.ramPct)}" style="width:${Math.min(d.ramPct,100)}%"></div></div></div>
+      <div class="stat"><div class="stat-label">CPU</div><div class="stat-val ${vc(d.cpu)}">${d.cpu}%</div><div class="bar"><div class="bar-fill ${bc(d.cpu)}" style="width:${Math.min(d.cpu,100)}%"></div></div></div>
+      <div class="stat"><div class="stat-label">RAM</div><div class="stat-val ${vc(d.ramPct)}">${d.ramPct}%</div><div class="bar"><div class="bar-fill ${bc(d.ramPct)}" style="width:${Math.min(d.ramPct,100)}%"></div></div></div>
       <div class="stat"><div class="stat-label">Disco</div><div class="stat-val">${d.diskFree}GB</div><div class="bar"><div class="bar-fill bar-ok" style="width:${Math.min((d.diskFree/d.diskTotal)*100,100)}%"></div></div></div>
       <div class="stat"><div class="stat-label">MEmu</div><div class="stat-val">${d.memu} inst</div></div>
-      <div class="stat"><div class="stat-label">Uptime</div><div class="stat-val" style="font-size:11px">${d.uptime||'N/A'}</div></div>
+      <div class="stat"><div class="stat-label">Uptime</div><div class="stat-val" style="font-size:10px">${d.uptime||'N/A'}</div></div>
       <div class="stat"><div class="stat-label">IP</div><div class="stat-val" style="font-size:10px">${d.ip||'N/A'}</div></div>
     </div>
-    <div class="pc-footer"><span>RAM: <strong>${d.ramUsed}/${d.ramTotal} GB</strong></span><span>•</span><span>Disco: <strong>${d.diskFree}/${d.diskTotal} GB</strong></span></div>
+    <div class="pc-ftr"><span>RAM: <strong>${d.ramUsed}/${d.ramTotal}GB</strong></span><span>•</span><span>Disco: <strong>${d.diskFree}/${d.diskTotal}GB</strong></span></div>
   </div>`;
 }
 
-function renderInstancias() {
-  const now = Math.floor(Date.now() / 1000);
-  const online = Object.values(pcData).filter(d => d && (now - d.ts) < 120);
-  if (!online.length) { document.getElementById('inst-content').innerHTML = '<div class="no-data">Sin datos</div>'; return; }
-  let html = '<div class="pc-card"><table class="inst-table"><thead><tr><th>PC</th><th>MEmu</th><th>CPU</th><th>RAM</th><th>Estado</th></tr></thead><tbody>';
-  for (const d of online) {
-    const st = (Date.now()/1000 - d.ts) < 120 ? '<span class="tag tag-on">Online</span>' : '<span class="tag tag-off">Offline</span>';
-    html += `<tr><td>${d.pc}</td><td>${d.memu}</td><td>${d.cpu}%</td><td>${d.ramPct}%</td><td>${st}</td></tr>`;
-  }
-  html += '</tbody></table></div>';
-  document.getElementById('inst-content').innerHTML = html;
-}
-
-function renderRecursos() {
-  const now = Math.floor(Date.now() / 1000);
-  const online = Object.values(pcData).filter(d => d && (now - d.ts) < 120);
-  if (!online.length) { document.getElementById('rec-content').innerHTML = '<div class="no-data">Sin datos</div>'; return; }
-  let html = '';
-  for (const d of online) {
-    html += `<div class="pc-card" style="margin-bottom:10px">
-      <div class="pc-header"><div class="pc-name"><i class="ti ti-device-desktop" aria-hidden="true"></i>${d.pc}</div></div>
-      <div style="padding:10px 12px">
-        <div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:var(--text2)">CPU</span><span>${d.cpu}%</span></div><div class="bar"><div class="bar-fill ${barColor(d.cpu)}" style="width:${Math.min(d.cpu,100)}%"></div></div></div>
-        <div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:var(--text2)">RAM ${d.ramUsed}/${d.ramTotal} GB</span><span>${d.ramPct}%</span></div><div class="bar"><div class="bar-fill ${barColor(d.ramPct)}" style="width:${Math.min(d.ramPct,100)}%"></div></div></div>
-        <div><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:var(--text2)">Disco ${d.diskFree}/${d.diskTotal} GB libre</span><span>${Math.round((d.diskFree/d.diskTotal)*100)}%</span></div><div class="bar"><div class="bar-fill bar-ok" style="width:${Math.min((d.diskFree/d.diskTotal)*100,100)}%"></div></div></div>
+function renderInstancias(){
+  const now=Math.floor(Date.now()/1000);
+  const online=Object.values(pcData).filter(d=>d&&(now-d.ts)<120);
+  if(!online.length){document.getElementById('inst-list').innerHTML='<div class="no-data">Sin datos</div>';return;}
+  let html='';
+  for(const d of online){
+    const pc=d.pc;
+    const insts=instData[pc]||[];
+    const running=insts.filter(i=>i.Status==='running').length;
+    html+=`<div class="pc-card">
+      <div class="inst-hdr" onclick="toggleInst('il-${pc}');loadInstances('${pc}')">
+        <div class="inst-title"><i class="ti ti-device-desktop" aria-hidden="true"></i> ${pc}</div>
+        <div class="inst-meta">${running}/${insts.length||d.memu} corriendo <i class="ti ti-chevron-down" aria-hidden="true"></i></div>
+      </div>
+      <div class="inst-list" id="il-${pc}">
+        ${insts.length?insts.map(inst=>`
+          <div class="inst-row">
+            <span class="inst-name">${inst.Name}</span>
+            <span class="inst-status ${inst.Status==='running'?'inst-on':'inst-off'}">${inst.Status==='running'?'ON':'OFF'}</span>
+            <div class="inst-actions">
+              ${inst.Status!=='running'?`<button class="act-btn start" onclick="sendCmd('${pc}','/start_${pc}_${inst.Index}')" title="Iniciar"><i class="ti ti-player-play" aria-hidden="true"></i></button>`:''}
+              ${inst.Status==='running'?`<button class="act-btn stop" onclick="sendCmd('${pc}','/stop_${pc}_${inst.Index}')" title="Detener"><i class="ti ti-player-stop" aria-hidden="true"></i></button>`:''}
+              ${inst.Status==='running'?`<button class="act-btn spotify" onclick="sendCmd('${pc}','/spotify_${pc}_${inst.Index}')" title="Spotify"><i class="ti ti-music" aria-hidden="true"></i></button>`:''}
+            </div>
+          </div>`).join(''):'<div class="no-data" style="padding:10px">Toca para cargar instancias</div>'}
       </div>
     </div>`;
   }
-  document.getElementById('rec-content').innerHTML = html;
+  document.getElementById('inst-list').innerHTML=html;
 }
 
-function renderAlertas() {
-  const now = Math.floor(Date.now() / 1000);
-  const offline = Object.values(pcData).filter(d => d && (now - d.ts) >= 120);
-  const highCpu = Object.values(pcData).filter(d => d && (now - d.ts) < 120 && d.cpu >= 90);
-  const highRam = Object.values(pcData).filter(d => d && (now - d.ts) < 120 && d.ramPct >= 90);
-
-  let html = '';
-  for (const d of offline) html += `<div class="alert-item"><i class="ti ti-alert-circle alert-icon danger" aria-hidden="true"></i><div><div class="alert-text">${d.pc} sin respuesta</div><div class="alert-time">${d.time||''}</div></div></div>`;
-  for (const d of highCpu) html += `<div class="alert-item"><i class="ti ti-cpu alert-icon warn" aria-hidden="true"></i><div><div class="alert-text">${d.pc} — CPU al ${d.cpu}%</div><div class="alert-time">${d.time||''}</div></div></div>`;
-  for (const d of highRam) html += `<div class="alert-item"><i class="ti ti-brain alert-icon warn" aria-hidden="true"></i><div><div class="alert-text">${d.pc} — RAM al ${d.ramPct}%</div><div class="alert-time">${d.time||''}</div></div></div>`;
-  if (!html) html = '<div class="no-data">Sin alertas activas</div>';
-  document.getElementById('alert-content').innerHTML = html;
+async function loadInstances(pc){
+  const tok=PC_TOKENS[pc];
+  if(!tok)return;
+  try{
+    await fetch(`https://api.telegram.org/bot${tok}/sendMessage?chat_id=5195844678&text=${encodeURIComponent('/list_'+pc)}`);
+    setTimeout(()=>fetchInstData(pc),3000);
+  }catch(e){}
 }
 
-function updateSummary() {
-  const now = Math.floor(Date.now() / 1000);
-  const online = Object.values(pcData).filter(d => d && (now - d.ts) < 120);
-  document.getElementById('s-online').textContent = online.length;
-  document.getElementById('s-total').textContent = Object.keys(pcData).length;
-  document.getElementById('s-memu').textContent = online.reduce((a,d) => a+(d.memu||0), 0);
-  document.getElementById('s-cpu').textContent = online.length ? Math.round(online.reduce((a,d) => a+(d.cpu||0),0)/online.length)+'%' : '—';
-  document.getElementById('s-ram').textContent = online.length ? Math.round(online.reduce((a,d) => a+(d.ramPct||0),0)/online.length)+'%' : '—';
-}
-
-async function loadData() {
-  const dot = document.getElementById('conn-dot');
-  dot.className = 'dot off';
-  try {
-    const res = await fetch(`https://api.telegram.org/bot${TOKEN}/getUpdates?limit=100&offset=-100`);
-    const json = await res.json();
-    if (!json.ok) throw new Error('API error');
-    const seen = {};
-    for (const upd of (json.result||[])) {
-      const msg = upd.channel_post || upd.message;
-      const text = msg && msg.text;
-      if (!text || !text.startsWith('PCDATA:')) continue;
-      try {
-        const raw = decodeURIComponent(text.replace('PCDATA:',''));
-        const d = JSON.parse(raw);
-        const key = d.pc||'PC';
-        if (!seen[key] || upd.update_id > seen[key].uid) seen[key] = {uid:upd.update_id,data:d,ts:msg.date};
-      } catch(e){}
+async function fetchInstData(pc){
+  try{
+    const res=await fetch(`https://api.telegram.org/bot${TOKEN}/getUpdates?limit=20&offset=-20`);
+    const json=await res.json();
+    for(const upd of(json.result||[])){
+      const msg=upd.channel_post||upd.message;
+      const text=msg&&msg.text;
+      if(!text||!text.startsWith('INSTDATA:'+pc+':'))continue;
+      try{
+        const raw=text.replace('INSTDATA:'+pc+':','');
+        instData[pc]=JSON.parse(raw);
+        renderInstancias();
+        break;
+      }catch(e){}
     }
-    pcData = {};
-    for (const [key,val] of Object.entries(seen)) pcData[key] = {...val.data, ts:val.ts};
-    dot.className = 'dot';
-    const now = new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-    document.getElementById('last-update').textContent = 'Actualizado ' + now;
-    document.getElementById('footer-time').textContent = 'Última actualización: ' + now;
-    const list = document.getElementById('pc-list');
-    list.innerHTML = Object.keys(pcData).length ? Object.keys(pcData).map(n => renderPC(n, pcData[n])).join('') : '<div class="no-data">Sin datos todavía</div>';
-    updateSummary();
-    renderInstancias();
-    renderRecursos();
-    renderAlertas();
-  } catch(e) {
-    dot.className = 'dot off';
-    document.getElementById('last-update').textContent = 'Error de conexión';
+  }catch(e){}
+}
+
+function renderRecursos(){
+  const now=Math.floor(Date.now()/1000);
+  const online=Object.values(pcData).filter(d=>d&&(now-d.ts)<120);
+  if(!online.length){document.getElementById('rec-list').innerHTML='<div class="no-data">Sin datos</div>';return;}
+  let html='';
+  for(const d of online){
+    html+=`<div class="res-card">
+      <div class="res-title"><i class="ti ti-device-desktop" aria-hidden="true"></i>${d.pc}</div>
+      <div class="res-row"><div class="res-lbl"><span>CPU</span><span>${d.cpu}%</span></div><div class="res-bar"><div class="res-fill ${bc(d.cpu)}" style="width:${Math.min(d.cpu,100)}%"></div></div></div>
+      <div class="res-row"><div class="res-lbl"><span>RAM ${d.ramUsed}/${d.ramTotal}GB</span><span>${d.ramPct}%</span></div><div class="res-bar"><div class="res-fill ${bc(d.ramPct)}" style="width:${Math.min(d.ramPct,100)}%"></div></div></div>
+      <div class="res-row"><div class="res-lbl"><span>Disco libre ${d.diskFree}/${d.diskTotal}GB</span><span>${Math.round((d.diskFree/d.diskTotal)*100)}%</span></div><div class="res-bar"><div class="res-fill bar-ok" style="width:${Math.min((d.diskFree/d.diskTotal)*100,100)}%"></div></div></div>
+    </div>`;
+  }
+  document.getElementById('rec-list').innerHTML=html;
+}
+
+function renderAlertas(){
+  const now=Math.floor(Date.now()/1000);
+  let html='';
+  for(const d of Object.values(pcData)){
+    if(!d)continue;
+    if((now-d.ts)>=120)html+=`<div class="alert-item"><i class="ti ti-alert-circle alert-icon danger" aria-hidden="true"></i><div><div class="alert-text">${d.pc} sin respuesta</div><div class="alert-time">${d.time||''}</div></div></div>`;
+    if((now-d.ts)<120&&d.cpu>=90)html+=`<div class="alert-item"><i class="ti ti-cpu alert-icon warn" aria-hidden="true"></i><div><div class="alert-text">${d.pc} — CPU al ${d.cpu}%</div><div class="alert-time">${d.time||''}</div></div></div>`;
+    if((now-d.ts)<120&&d.ramPct>=90)html+=`<div class="alert-item"><i class="ti ti-brain alert-icon warn" aria-hidden="true"></i><div><div class="alert-text">${d.pc} — RAM al ${d.ramPct}%</div><div class="alert-time">${d.time||''}</div></div></div>`;
+  }
+  document.getElementById('alert-list').innerHTML=html||'<div class="no-data">Sin alertas activas</div>';
+}
+
+function updateSummary(){
+  const now=Math.floor(Date.now()/1000);
+  const on=Object.values(pcData).filter(d=>d&&(now-d.ts)<120);
+  document.getElementById('s-on').textContent=on.length;
+  document.getElementById('s-tot').textContent=Object.keys(pcData).length;
+  document.getElementById('s-mu').textContent=on.reduce((a,d)=>a+(d.memu||0),0);
+  document.getElementById('s-cpu').textContent=on.length?Math.round(on.reduce((a,d)=>a+(d.cpu||0),0)/on.length)+'%':'—';
+  document.getElementById('s-ram').textContent=on.length?Math.round(on.reduce((a,d)=>a+(d.ramPct||0),0)/on.length)+'%':'—';
+}
+
+async function loadData(){
+  document.getElementById('dot').className='dot off';
+  try{
+    const res=await fetch(`https://api.telegram.org/bot${TOKEN}/getUpdates?limit=100&offset=-100`);
+    const json=await res.json();
+    if(!json.ok)throw new Error();
+    const seen={};
+    for(const upd of(json.result||[])){
+      const msg=upd.channel_post||upd.message;
+      const text=msg&&msg.text;
+      if(!text||!text.startsWith('PCDATA:'))continue;
+      try{
+        const raw=decodeURIComponent(text.replace('PCDATA:',''));
+        const d=JSON.parse(raw);
+        const key=d.pc||'PC';
+        if(!seen[key]||upd.update_id>seen[key].uid)seen[key]={uid:upd.update_id,data:d,ts:msg.date};
+      }catch(e){}
+    }
+    pcData={};
+    for(const[key,val]of Object.entries(seen))pcData[key]={...val.data,ts:val.ts};
+    document.getElementById('dot').className='dot';
+    const now=new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    document.getElementById('upd').textContent='Actualizado '+now;
+    document.getElementById('pc-list').innerHTML=Object.keys(pcData).length?Object.keys(pcData).map(n=>renderPC(n,pcData[n])).join(''):'<div class="no-data">Sin datos todavía</div>';
+    updateSummary();renderInstancias();renderRecursos();renderAlertas();
+  }catch(e){
+    document.getElementById('dot').className='dot off';
+    document.getElementById('upd').textContent='Error de conexión';
   }
 }
 
 loadData();
-setInterval(loadData, 10000);
+setInterval(loadData,10000);
 </script>
 </body>
 </html>
